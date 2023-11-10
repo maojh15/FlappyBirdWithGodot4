@@ -1,0 +1,75 @@
+[gd_scene load_steps=6 format=3 uid="uid://b2h8fy42fo4wk"]
+
+[ext_resource type="Texture2D" uid="uid://drx10uoxjpba5" path="res://Assets/pipe-green.png" id="1_njqf7"]
+[ext_resource type="Script" path="res://src/tube.cs" id="1_w1l8x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s8acq"]
+size = Vector2(50, 23)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xsrv8"]
+size = Vector2(44, 455)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rpn6s"]
+size = Vector2(28, 587)
+
+[node name="Tube" type="Node2D" groups=["tube_group"]]
+script = ExtResource("1_w1l8x")
+DistanceBetweenTube = 60.0
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]
+position = Vector2(0, -40)
+scale = Vector2(2.6, -1)
+
+[node name="up_tube" type="StaticBody2D" parent="."]
+position = Vector2(2.08165e-12, -40)
+scale = Vector2(1, -1)
+
+[node name="TextureRect" type="TextureRect" parent="up_tube"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -26.0
+offset_right = 26.0
+offset_bottom = 480.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture = ExtResource("1_njqf7")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="up_tube"]
+position = Vector2(0, 12)
+shape = SubResource("RectangleShape2D_s8acq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="up_tube"]
+position = Vector2(0, 251)
+shape = SubResource("RectangleShape2D_xsrv8")
+
+[node name="down_tube" type="StaticBody2D" parent="."]
+position = Vector2(2.08165e-12, 40)
+
+[node name="TextureRect" type="TextureRect" parent="down_tube"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -26.0
+offset_right = 26.0
+offset_bottom = 480.0
+grow_horizontal = 2
+texture = ExtResource("1_njqf7")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="down_tube"]
+position = Vector2(0, 12)
+shape = SubResource("RectangleShape2D_s8acq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="down_tube"]
+position = Vector2(0, 251)
+shape = SubResource("RectangleShape2D_xsrv8")
+
+[node name="GetScore" type="Area2D" parent="."]
+
+[node name="GetScoreArea" type="CollisionShape2D" parent="GetScore"]
+position = Vector2(42, 3.5)
+shape = SubResource("RectangleShape2D_rpn6s")
+
+[connection signal="screen_exited" from="VisibleOnScreenEnabler2D" to="." method="_on_visible_on_screen_enabler_2d_screen_exited"]
+[connection signal="body_entered" from="GetScore" to="." method="EmitGetScore"]

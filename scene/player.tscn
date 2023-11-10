@@ -1,0 +1,251 @@
+[gd_scene load_steps=24 format=3 uid="uid://d3boeqqxgrxub"]
+
+[ext_resource type="Script" path="res://src/player.cs" id="1_6en6s"]
+[ext_resource type="Texture2D" uid="uid://bjn7mqbj3rrm" path="res://Assets/yellowbird-midflap.png" id="1_81yd5"]
+[ext_resource type="Texture2D" uid="uid://cfmtmqos4atil" path="res://Assets/yellowbird-upflap.png" id="2_bb01m"]
+[ext_resource type="Texture2D" uid="uid://bxetx2w3gs4gr" path="res://Assets/yellowbird-downflap.png" id="3_nd2o4"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bi2bm"]
+radius = 12.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ocjid"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_bb01m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_nd2o4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_81yd5")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 9.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_bb01m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_nd2o4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_81yd5")
+}],
+"loop": false,
+"name": &"fly_up",
+"speed": 9.0
+}]
+
+[sub_resource type="Animation" id="Animation_2pjqs"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"fly"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_66inb"]
+resource_name = "fall"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.677188, 1.5708]
+}
+
+[sub_resource type="Animation" id="Animation_2n8pl"]
+resource_name = "fly"
+length = 0.3333
+loop_mode = 1
+step = 0.111111
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1111, 0.2222),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"fly"]
+}
+
+[sub_resource type="Animation" id="Animation_6wv0b"]
+resource_name = "fly_up"
+length = 0.3333
+step = 0.111111
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"fly_up"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.111111, 0.222222),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.33437),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.523599, -0.677188]
+}
+
+[sub_resource type="Animation" id="Animation_5wlms"]
+resource_name = "game_over"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [3.48787e-16, 1.5708]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_reeqc"]
+_data = {
+"RESET": SubResource("Animation_2pjqs"),
+"fall": SubResource("Animation_66inb"),
+"fly": SubResource("Animation_2n8pl"),
+"fly_up": SubResource("Animation_6wv0b"),
+"game_over": SubResource("Animation_5wlms")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_t3h1h"]
+animation = &"fall"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8fq6y"]
+animation = &"fly"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_eru3u"]
+animation = &"fly_up"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_saeny"]
+animation = &"game_over"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_crjv0"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_u6kw3"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_knki1"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g2pnn"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lfc3p"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ymylu"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ro7f8"]
+states/fall/node = SubResource("AnimationNodeAnimation_t3h1h")
+states/fall/position = Vector2(564.5, 100.25)
+states/fly/node = SubResource("AnimationNodeAnimation_8fq6y")
+states/fly/position = Vector2(326.5, 99.9062)
+states/fly_up/node = SubResource("AnimationNodeAnimation_eru3u")
+states/fly_up/position = Vector2(455.5, 99.625)
+states/game_over/node = SubResource("AnimationNodeAnimation_saeny")
+states/game_over/position = Vector2(580.5, 189.5)
+transitions = ["fly", "fly_up", SubResource("AnimationNodeStateMachineTransition_crjv0"), "Start", "fly", SubResource("AnimationNodeStateMachineTransition_u6kw3"), "fly_up", "fall", SubResource("AnimationNodeStateMachineTransition_knki1"), "fall", "fly_up", SubResource("AnimationNodeStateMachineTransition_g2pnn"), "fly_up", "game_over", SubResource("AnimationNodeStateMachineTransition_lfc3p"), "fall", "game_over", SubResource("AnimationNodeStateMachineTransition_ymylu")]
+graph_offset = Vector2(92, 24)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_6en6s")
+JumpVelocity = 300.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_bi2bm")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ocjid")
+animation = &"fly"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_reeqc")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_ro7f8")
+anim_player = NodePath("../AnimationPlayer")
